@@ -17,6 +17,7 @@ score = 0
 level=np.array(nextlevel(nl))
 
 holepos = []
+pointpos = []
 
             
 
@@ -32,6 +33,8 @@ vy = 0
 FPS = 60
 step = 0
 
+score=0
+
 for i in range(8):
     for j in range(8):
         if level[i, j] == 1:
@@ -41,6 +44,8 @@ for i in range(8):
             holepos.append([i, j])
         elif level[i, j] == -1:
             goalpos = [i, j]
+        elif level[i,j] == 4:
+            pointpos.append([i,j])
 
 
 
@@ -93,12 +98,15 @@ while running:
         bx += vx
 
     if [bx, by] in holepos:
-        GAMEOVER()
+        GAMEOVER(score)
         nl = 1
+    if [bx,by] in pointpos:
+        score+=100
 
         level=np.array(nextlevel(nl))
 
         holepos = []
+        pointpos=[]
 
         for i in range(8):
             for j in range(8):
@@ -109,6 +117,8 @@ while running:
                     holepos.append([i, j])
                 elif level[i, j] == -1:
                     goalpos = [i, j]
+                elif level[i,j] == 4:
+                    pointpos.append([i,j])
 
 
     
@@ -121,6 +131,7 @@ while running:
    
 
         holepos = []
+        pointpos=[]
         
         for i in range(8):
             for j in range(8):
@@ -131,6 +142,8 @@ while running:
                     holepos.append([i, j])
                 elif level[i, j] == -1:
                     goalpos = [i, j]
+                elif level[i,j] == 4:
+                    pointpos.append([i,j])
 
 
 
